@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart';
-import 'ocr_screen.dart';
+import '../login_page.dart';
+import '../ocr_screen.dart';
 
 class AdminPage extends StatelessWidget {
   final Map<String, dynamic> usuario;

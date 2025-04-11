@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'register_page.dart';
-import 'usuario_page.dart';
-import 'admin_page.dart';
-import 'super_admin_page.dart';
+import 'User/usuario_page.dart';
+import 'Administrador/admin_page.dart';
+import 'Superadmin/super_admin_page.dart';
+import 'configuracion.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -18,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> _login() async {
     final response = await http.post(
-      Uri.parse('http://10.0.0.11:4001/api/usuarios/login'),
+      Uri.parse('${Config.ipback}/usuarios/login'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'nombre_usuario': _usuarioController.text.trim(),
@@ -34,7 +35,6 @@ class _LoginPageState extends State<LoginPage> {
 
       Widget destino;
 
-      // Elegir a qué pantalla ir según el rol
       switch (rol) {
         case 'Usuario':
           destino = UsuarioPage(usuario: usuario);

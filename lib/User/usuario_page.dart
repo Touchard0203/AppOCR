@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart';
+import '../login_page.dart';
 
 class UsuarioPage extends StatelessWidget {
   final Map<String, dynamic> usuario;
