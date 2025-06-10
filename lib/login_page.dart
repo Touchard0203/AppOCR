@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'register_page.dart'; // Asegúrate de que esta ruta sea correcta
-import 'User/usuario_page.dart'; // Ruta a UsuarioPage
-import 'Administrador/admin_page.dart'; // Ruta a AdminPage
-import 'Superadmin/super_admin_page.dart'; // Ruta a SuperAdminPage
-import 'configuracion.dart'; // Archivo con la configuración de la IP
+import 'register_page.dart';
+import 'User/usuario_page.dart';
+import 'Administrador/admin_page.dart';
+import 'Superadmin/super_admin_page.dart';
+import 'configuracion.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -93,12 +93,10 @@ class _LoginPageState extends State<LoginPage> {
           padding: const EdgeInsets.all(20),
           child: Card(
             margin: const EdgeInsets.all(
-              0,
-            ), // El padding del SingleChildScrollView ya lo controla
+                0), // El padding del SingleChildScrollView ya lo controla
             elevation: 8,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             child: Padding(
               padding: const EdgeInsets.all(24),
               child: Column(
@@ -109,8 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: InputDecoration(
                       labelText: 'Nombre de usuario',
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                          borderRadius: BorderRadius.circular(12)),
                       prefixIcon: const Icon(Icons.person),
                     ),
                   ),
@@ -121,8 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: InputDecoration(
                       labelText: 'Contraseña',
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                          borderRadius: BorderRadius.circular(12)),
                       prefixIcon: const Icon(Icons.lock),
                     ),
                   ),
@@ -134,14 +130,11 @@ class _LoginPageState extends State<LoginPage> {
                           Colors.white, // Color del texto del botón
                       minimumSize: const Size.fromHeight(50),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                          borderRadius: BorderRadius.circular(12)),
                     ),
                     onPressed: _login,
-                    child: const Text(
-                      'Iniciar sesión',
-                      style: TextStyle(fontSize: 18),
-                    ),
+                    child: const Text('Iniciar sesión',
+                        style: TextStyle(fontSize: 18)),
                   ),
                   if (mensaje.isNotEmpty)
                     Padding(
@@ -149,9 +142,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Text(
                         mensaje,
                         style: const TextStyle(
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            color: Colors.red, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -162,10 +153,8 @@ class _LoginPageState extends State<LoginPage> {
                         MaterialPageRoute(builder: (context) => RegisterPage()),
                       );
                     },
-                    child: const Text(
-                      '¿No tienes cuenta? Regístrate aquí',
-                      style: TextStyle(color: Colors.lightBlue),
-                    ),
+                    child: const Text('¿No tienes cuenta? Regístrate aquí',
+                        style: TextStyle(color: Colors.lightBlue)),
                   ),
                 ],
               ),

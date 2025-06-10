@@ -46,21 +46,21 @@ class Documento {
   }
 }
 
-class DocumentosPageUser extends StatefulWidget {
+class DocumentosPageAdmin extends StatefulWidget {
   final String idDependencia;
   final String idUsuario;
 
-  const DocumentosPageUser({
+  const DocumentosPageAdmin({
     super.key,
     required this.idDependencia,
     required this.idUsuario,
   });
 
   @override
-  State<DocumentosPageUser> createState() => _DocumentosPageUserState();
+  State<DocumentosPageAdmin> createState() => _DocumentosPageAdminState();
 }
 
-class _DocumentosPageUserState extends State<DocumentosPageUser> {
+class _DocumentosPageAdminState extends State<DocumentosPageAdmin> {
   List<Carpeta> carpetas = [];
   List<Documento> documentos = [];
   List<String> path = [];
@@ -74,7 +74,6 @@ class _DocumentosPageUserState extends State<DocumentosPageUser> {
     _loadInitialData();
   }
 
-  // Función para cargar datos iniciales (carpetas de la dependencia del usuario)
   Future<void> _loadInitialData() async {
     setState(() {
       _isLoading = true;
@@ -85,7 +84,6 @@ class _DocumentosPageUserState extends State<DocumentosPageUser> {
     });
   }
 
-  // Obtiene TODAS las carpetas (globales), sin filtro por id_dependencia en la URL
   Future<void> fetchCarpetas() async {
     try {
       final url = '${Config.ipback}/carpetas';
@@ -118,7 +116,6 @@ class _DocumentosPageUserState extends State<DocumentosPageUser> {
     }
   }
 
-  // Obtiene los documentos filtrados por id_carpeta, id_dependencia y id_usuario
   Future<void> fetchDocumentos(String idCarpeta) async {
     setState(() {
       _isLoading = true;
@@ -126,7 +123,7 @@ class _DocumentosPageUserState extends State<DocumentosPageUser> {
     });
     try {
       final url =
-          '${Config.ipback}/documentos/docs/?id_carpeta=$idCarpeta&id_dependencia=${widget.idDependencia}&id_usuario=${widget.idUsuario}';
+          '${Config.ipback}/documentos/?id_carpeta=$idCarpeta&id_dependencia=${widget.idDependencia}';
       print('DEBUG (User): Solicitando documentos de: $url');
       final response = await http.get(Uri.parse(url));
 
@@ -176,7 +173,6 @@ class _DocumentosPageUserState extends State<DocumentosPageUser> {
     }
   }
 
-  // Abre una carpeta y carga sus documentos
   void abrirCarpeta(String idCarpeta) {
     setState(() {
       currentFolder = idCarpeta;
@@ -187,7 +183,6 @@ class _DocumentosPageUserState extends State<DocumentosPageUser> {
     fetchDocumentos(idCarpeta);
   }
 
-  // Retrocede a la carpeta padre
   void retroceder() {
     if (path.isNotEmpty) {
       path.removeLast();
@@ -204,7 +199,6 @@ class _DocumentosPageUserState extends State<DocumentosPageUser> {
     }
   }
 
-  // Abre un documento en el navegador
   Future<void> _launchURL(String url) async {
     final Uri uri = Uri.parse(url);
     if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
@@ -288,7 +282,7 @@ class _DocumentosPageUserState extends State<DocumentosPageUser> {
                             },
                           ),
                         ),
-
+                      // Separador si hay carpetas y documentos
                       if (carpetasFiltradas.isNotEmpty && documentos.isNotEmpty)
                         const Divider(
                             height: 20,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:ocrtest/Superadmin/editar_usuario_page.dart';
+import '../Superadmin/editar_usuario_page.dart';
 import 'dart:convert';
 import '../configuracion.dart';
 
@@ -52,54 +52,56 @@ class _UsuariosPageState extends State<UsuariosPage> {
         title: Text('Gestión de Usuarios'),
         backgroundColor: Colors.blueGrey,
       ),
-      body:
-          isLoading
-              ? Center(child: CircularProgressIndicator())
-              : error != null
+      body: isLoading
+          ? Center(child: CircularProgressIndicator())
+          : error != null
               ? Center(child: Text(error!))
               : ListView.builder(
-                itemCount: usuarios.length,
-                itemBuilder: (context, index) {
-                  final usuario = usuarios[index];
-                  return Card(
-                    margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    child: ListTile(
-                      title: Text(usuario['nombre_usuario']),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Rol: ${usuario['rol']}'),
-                          Text(
-                            'Dependencia: ${usuario['id_dependencia'] ?? 'Sin asignar'}',
-                          ),
-                        ],
-                      ),
-                      leading: CircleAvatar(
-                        child: Text(usuario['nombre_usuario'][0].toUpperCase()),
-                      ),
-                      onTap: () async {
-                        final actualizado = await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => EditarUsuarioPage(usuario: usuario),
-                          ),
-                        );
+                  itemCount: usuarios.length,
+                  itemBuilder: (context, index) {
+                    final usuario = usuarios[index];
+                    return Card(
+                      margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      child: ListTile(
+                        title: Text(usuario['nombre_usuario']),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Rol: ${usuario['rol']}'),
+                            Text(
+                                'Dependencia: ${usuario['id_dependencia'] ?? 'Sin asignar'}'),
+                          ],
+                        ),
+                        leading: CircleAvatar(
+                          child:
+                              Text(usuario['nombre_usuario'][0].toUpperCase()),
+                        ),
+                        onTap: () async {
+                          final actualizado = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  EditarUsuarioPage(usuario: usuario),
+                            ),
+                          );
 
-                        if (actualizado == true) {
-                          _fetchUsuarios();
-                        }
-                      },
-                    ),
-                  );
-                },
-              ),
+                          if (actualizado == true) {
+                            _fetchUsuarios();
+                          }
+                        },
+                      ),
+                    );
+                  },
+                ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blueGrey,
         child: Icon(Icons.add),
         onPressed: () async {
           final creado = await Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => EditarUsuarioPage(usuario: null)),
+            MaterialPageRoute(
+              builder: (_) => EditarUsuarioPage(usuario: null),
+            ),
           );
 
           if (creado == true) {

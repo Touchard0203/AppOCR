@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ocrtest/Superadmin/dependencias_page.dart';
-import 'package:ocrtest/Superadmin/documentos_page.dart';
-import 'package:ocrtest/Superadmin/usuarios_page.dart';
+import '../Superadmin/dependencias_page.dart';
+import '../Superadmin/documentos_page.dart';
+import '../Superadmin/usuarios_page.dart';
 import '../login_page.dart';
 import '../ocr_screen.dart';
 
